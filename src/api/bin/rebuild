@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build . -t api
+docker run -p 5051:5051 api

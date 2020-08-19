@@ -12,7 +12,7 @@ type Probability struct {
 
 // ProbabilityHandler just sends a dummy response for now
 func ProbabilityHandler(w http.ResponseWriter, r *http.Request) {
-	probability := Probability{82}
+	probability := Probability{62}
 
 	json.NewEncoder(w).Encode(probability)
 }
