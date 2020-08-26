@@ -1,10 +1,6 @@
 module.exports = {
-  plugins: ["wdio"],
-  extends: "plugin:wdio/recommended",
-  env: {
-    mocha: true
-  },
   rules: {
-    strict: "off"
+    '@typescript-eslint/no-var-requires': 'off',
+    'no-unused-expressions': 'off'
   }
-};
+}

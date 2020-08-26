@@ -13,7 +13,7 @@
             id="avg_skill_bonus"
             name="avg_skill_bonus"
             type="number"
-            v-model="avg_skill_bonus"
+            v-model="avgSkillBonus"
           />
         </div>
 
@@ -28,7 +28,7 @@
             id="skill_check_dc"
             name="skill_check_dc"
             type="number"
-            v-model="skill_check_dc"
+            v-model="skillCheckDc"
           />
         </div>
 
@@ -90,46 +90,41 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Main",
-  props: {
-    msg: String
-  },
-  data() {
-    return {
-      avg_skill_bonus: 3,
-      skill_check_dc: 14,
-      successes: 6,
-      failures: 3
-    };
-  },
-  methods: {
-    formSubmit(e) {
-      e.preventDefault();
-      const currentObj = this;
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import axios from 'axios'
 
-      this.axios
-        .get("http://localhost:5051", {
-          params: {
-            skillBonus: this.avg_skill_bonus,
-            dc: this.skill_check_dc,
-            successes: this.successes,
-            failures: this.failures
-          }
-        })
-        .then(function(response) {
-          currentObj.msg =
-            +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
-        })
-        .catch(function(err) {
-          currentObj.msg = err;
-        });
+@Options({})
 
-      return false;
-    }
+export default class Main extends Vue {
+  avgSkillBonus = 3
+  skillCheckDc = 14
+  successes = 3
+  failures = 3
+  msg = ""
+
+  formSubmit(e: any) {
+    e.preventDefault();
+
+    axios
+      .get("http://localhost:5051", {
+        params: {
+          skillBonus: this.avgSkillBonus,
+          dc: this.skillCheckDc,
+          successes: this.successes,
+          failures: this.failures
+        }
+      })
+      .then((response: any) => {
+        this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
+      })
+      .catch((err: any) => {
+        this.msg = err;
+      });
+
+    return false;
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

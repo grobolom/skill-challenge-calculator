@@ -2,8 +2,11 @@
 node_modules
 /dist
 
+/tests/e2e/reports/
+selenium-debug.log
+chromedriver.log
+geckodriver.log
 
-/tests/e2e/logs/
 
 # local env files
 .env.local
