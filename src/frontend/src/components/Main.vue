@@ -1,23 +1,37 @@
 <template>
   <div class="main">
-    <form @submit="formSubmit">
-      <label for='avg_skill_bonus'>Average Skill Bonus</label>
-      <input name='avg_skill_bonus' type='text' v-model="avg_skill_bonus" />
+    <div class='container mx-auto max-w-xs'>
+      <form @submit="formSubmit">
+        <div class='mb-4'>
+          <label class='text-gray-700 text-sm font-bold mb-2 float-left' for='avg_skill_bonus'>Average Skill Bonus</label>
+          <input class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-1' id="avg_skill_bonus" name='avg_skill_bonus' type='number' v-model="avg_skill_bonus" />
+        </div>
 
-      <label for='skill_check_dc'>Skill Check DC</label>
-      <input name='skill_check_dc' type='text' v-model="skill_check_dc" />
+        <div class='mb-4'>
+          <label class='text-gray-700 text-sm font-bold mb-2 float-left' for='skill_check_dc'>Skill Check DC</label>
+          <input class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id="skill_check_dc" name='skill_check_dc' type='number' v-model="skill_check_dc" />
+        </div>
 
-      <label for='successes'>Successes</label>
-      <input name='successes' type='text' v-model="successes" />
+        <div class='mb-4'>
+          <label class='text-gray-700 text-sm font-bold mb-2 float-left' for='successes'>Successes</label>
+          <input class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id="successes" name='successes' type='number' v-model="successes" />
+        </div>
 
-      <label for='failures'>Failures</label>
-      <input name='failures' type='text' v-model="failures" />
+        <div class='mb-4'>
+          <label class='text-gray-700 text-sm font-bold mb-2 float-left' for='failures'>Failures</label>
+          <input class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id="failures" name='failures' type='number' v-model="failures" />
+        </div>
 
-      <button>Submit</button>
+        <div class='mb-4'>
+          <button class='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow'>Submit</button>
+        </div>
 
-      <label for='chance_of_success'>Chance of Success</label>
-      <input name='chance_of_success' type='text' readonly :value="msg" />
-    </form>
+        <div class='mb-4'>
+          <label class='text-gray-700 text-sm font-bold mb-2 float-left' for='chance_of_success'>Chance of Success</label>
+          <input class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id="chance_of_success" name='chance_of_success' type='text' readonly :value="msg" />
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -29,10 +43,10 @@ export default {
   },
   data() {
     return {
-      avg_skill_bonus: 5,
-      skill_check_dc: 5,
-      successes: 0,
-      failures: 0,
+      avg_skill_bonus: 3,
+      skill_check_dc: 14,
+      successes: 6,
+      failures: 3,
     }
   },
   methods: {
@@ -48,7 +62,7 @@ export default {
           failures: this.failures
         }
       }).then(function(response) {
-        currentObj.msg = response.data["ChanceOfSuccess"]
+        currentObj.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%"
       }).catch(function(err) {
         currentObj.msg = err
       })
