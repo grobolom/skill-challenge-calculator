@@ -1,4 +1,5 @@
 #!/bin/bash
 
+# rebuilds and tries to rerun the current API container
 docker build . -t api
 docker run -p 5051:5051 api

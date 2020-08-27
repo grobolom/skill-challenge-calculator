@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# kills the currently running api container
+docker kill $(docker ps -f ancestor=api -q)
