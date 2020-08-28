@@ -69,7 +69,7 @@ export default class Main extends Vue {
     e.preventDefault();
 
     axios
-      .get(process.env.VUE_APP_API_URL, {
+      .get(process.env.VUE_APP_APIURL, {
         params: {
           skillBonus: this.avgSkillBonus,
           dc: this.skillCheckDc,
