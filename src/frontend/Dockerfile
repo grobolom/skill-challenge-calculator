@@ -5,6 +5,7 @@ WORKDIR /app
 # adds the bin scripts inside node modules
 ENV PATH /app/node_modules/.bin:$PATH
 
+COPY .env /app/.env
 COPY package.json /app/package.json
 RUN yarn
 RUN yarn global add @vue/cli@3.7.0
