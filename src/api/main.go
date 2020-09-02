@@ -13,7 +13,7 @@ type Probability struct {
 }
 
 func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "skillcalc5e.cc")
+	(*w).Header().Set("Access-Control-Allow-Origin", "http://skillcalc5e.cc")
 }
 
 // ProbabilityHandler just sends a dummy response for now
