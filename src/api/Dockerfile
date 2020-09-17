@@ -16,6 +16,8 @@ ADD . /app
 ## directory
 WORKDIR /app
 
+ENV ACCESS_CONTROL_ALLOW_ORIGIN, "https://skillcalc5e.cc"
+
 ## we run go build to compile the binary
 ## executable of our Go program
 RUN go build -o main .
