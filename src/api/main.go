@@ -59,6 +59,53 @@ func ProbabilityHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(result)
 }
 
+func ProbabilityRangeHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	successes := []int{3, 4, 5, 6, 7, 8, 9, 10, 11}
+	failures := 3
+	DC := 14
+	skillBonus := 3
+	var err error
+
+	formFailures := r.FormValue("failures")
+	formSkillBonus := r.FormValue("skillBonus")
+	formDC := r.FormValue("dc")
+
+	if formFailures != "" {
+		failures, err = strconv.Atoi(formFailures)
+	}
+
+	if formDC != "" {
+		DC, err = strconv.Atoi(formDC)
+	}
+
+	if formSkillBonus != "" {
+		skillBonus, err = strconv.Atoi(formSkillBonus)
+	}
+
+	// for now, it's fine to ignore this shit
+	if err != nil {
+	}
+
+	probability := math.Min(float64(21-(DC-skillBonus))/20, 1)
+
+	result := GetProbabilityRange(successes, failures, probability)
+
+	json.NewEncoder(w).Encode(result)
+}
+
+// GetProbabilityRange gets a series of probabilities for different counts of successes
+func GetProbabilityRange(successRange []int, failures int, probability float64) []Probability {
+	var pr = []Probability{}
+
+	for i := 0; i < len(successRange); i++ {
+		pr = append(pr, Probability{CalculateTotalProbability(successRange[i], failures, probability)})
+	}
+
+	return pr
+}
+
 // Factorial does something
 func Factorial(integer int) int {
 	sum := 1
@@ -92,5 +139,6 @@ func CalculateTotalProbability(successes int, failures int, probability float64)
 
 func main() {
 	http.HandleFunc("/", ProbabilityHandler)
+	http.HandleFunc("/v2", ProbabilityRangeHandler)
 	http.ListenAndServe(":5051", nil)
 }
