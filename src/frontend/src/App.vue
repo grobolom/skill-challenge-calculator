@@ -7,10 +7,12 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Main from './components/Main.vue';
+import Chart from './components/Chart.vue';
 
 @Options({
   components: {
     Main,
+    Chart,
   },
 })
 export default class App extends Vue {}
