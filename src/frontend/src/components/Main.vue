@@ -86,10 +86,10 @@ export default defineComponent({
             failures: this.failures
           }
         })
-        .then(function(this: any, response: any) {
+        .then((response: any) => {
           this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
         })
-        .catch(function(this: any, err: any) {
+        .catch((err: any) => {
           this.msg = err;
         });
 
