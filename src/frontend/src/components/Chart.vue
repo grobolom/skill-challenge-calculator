@@ -69,6 +69,8 @@ export default {
       .join("circle")
       .attr("cx", d => x(d.successes))
       .attr("cy", d => y(d.percent))
+      .attr('stroke', 'rgb(0 0 0)')
+      .attr('stroke-width', '1')
       .attr("r", 12);
 
     // this is the percentages as text on the chart
