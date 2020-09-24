@@ -1,77 +1,87 @@
 <template>
   <div>
     <h2>Chart</h2>
-    <svg id="viz" width="1250" height="800" class="container-border" />
+    <svg id='viz' width='400' height='400' class='container-border' />
   </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
+
 export default {
   data () {
     return {}
   },
   mounted () {
-    const duration = 750
-    const width = 1250
-    const height = 800
-    const svg = d3.select('#viz').attr('viewBox', [-10, -10, width, height])
-    const layoutTree = d3.tree().size([width - 20, height - 20])
-    const renderLink = d3.linkVertical().x(d => d.x).y(d => d.y)
-    const Node = d3.hierarchy.prototype.constructor
-    const root = new Node()
-    const nodes = [root]
-    const links = []
-    layoutTree(root)
-    let link = svg.append('g')
-      .attr('fill', 'none')
-      .attr('stroke', '#000')
-      .selectAll('.link')
-    let node = svg.append('g')
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 2)
-      .selectAll('.node')
-    const interval = d3.interval(() => {
-      if (nodes.length >= 5) {
-        return interval.stop()
+    const data = [
+      {
+        successes: 4,
+        percent: 50.5
+      },
+      {
+        successes: 5,
+        percent: 30.2
+      },
+      {
+        successes: 6,
+        percent: 25.1
+      },
+      {
+        successes: 7,
+        percent: 20.6
       }
-      // Add a new node to a random parent.
-      const parent = nodes[Math.random() * nodes.length | 0]
-      const child = Object.assign(new Node(), { parent, depth: parent.depth + 1 })
-      if (parent.children) parent.children.push(child)
-      else parent.children = [child]
-      nodes.push(child)
-      links.push({ source: parent, target: child })
-      // Recompute the layout.
-      layoutTree(root)
-      // Add entering nodes in the parent’s old position.
-      node = node.data(nodes)
-      node = node.enter().append('circle')
-        .attr('class', 'node')
-        .attr('r', 4)
-        .attr('cx', d => d.parent ? d.parent.px : d.px = d.x) // eslint-disable-line
-        .attr('cy', d => d.parent ? d.parent.py : d.py = d.y) // eslint-disable-line
-        .merge(node)
-      // Add entering links in the parent’s old position.
-      link = link.data(links)
-      link = link.enter().insert('path', '.node')
-        .attr('class', 'link')
-        .attr('d', d => {
-          const o = { x: d.source.px, y: d.source.py }
-          return renderLink({ source: o, target: o })
-        })
-        .merge(link)
-      // Transition nodes and links to their new positions.
-      const t = svg.transition()
-        .duration(duration)
-      link.transition(t)
-        .attr('d', renderLink)
-      node.transition(t)
-        .attr('cx', d => d.px = d.x) // eslint-disable-line
-        .attr('cy', d => d.py = d.y) // eslint-disable-line
-    }, duration)
-    // invalidation.then(() => interval.stop())
-    // return svg.node()
+    ]
+
+    const width = 500
+    const height = 500
+    const svg = d3
+      .select('#viz')
+      .attr('viewBox', [-10, -10, width, height])
+      .attr('font-family', 'sans-serif')
+      .attr('font-size', 10);
+
+    const x = d3.scalePoint()
+                .domain(data.map(d => d.successes))
+                .range([0, 400])
+
+    const y = d3.scaleLinear()
+                .domain([100, 0])
+                .range([0, 400])
+
+    const line = d3.line()
+                   .x(d => x(d.successes))
+                   .y(d => y(d.percent))
+
+    svg
+      .append('path')
+      .attr('d', line(data))
+      .attr('fill', 'none')
+      .attr('stroke', 'rgb(0 0 0)')
+      .attr('stroke-width', 1);
+
+    // these are blank spots on the chart to provide a background for
+    // the text below to be added and readable
+    svg
+      .append("g")
+      .attr("fill", "#fff")
+      .selectAll("circle")
+      .data(data)
+      .join("circle")
+      .attr("cx", d => x(d.successes))
+      .attr("cy", d => y(d.percent))
+      .attr("r", 12);
+
+    // this is the percentages as text on the chart
+    svg
+      .append('g')
+      .attr('text-anchor', 'middle')
+      .selectAll('text')
+      .data(data)
+      .join('text')
+      .attr('x', d => x(d.successes))
+      .attr('y', d => y(d.percent))
+      .attr('dy', '0.35em')
+      .text(d => d.percent);
   }
 }
 </script>
