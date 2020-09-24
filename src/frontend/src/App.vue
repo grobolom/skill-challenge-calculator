@@ -5,17 +5,13 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import Main from './components/Main.vue';
-import Chart from './components/Chart.vue';
 
-@Options({
+export default {
   components: {
     Main,
-    Chart,
-  },
-})
-export default class App extends Vue {}
+  }
+}
 </script>
 
 <style lang="scss">

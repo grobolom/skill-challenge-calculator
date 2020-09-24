@@ -56,38 +56,47 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
 import axios from 'axios'
+import { defineComponent } from 'vue'
+import Chart from './Chart.vue'
 
-export default class Main extends Vue {
-  avgSkillBonus = 3
-  skillCheckDc = 14
-  successes = 3
-  failures = 3
-  msg = ""
+export default defineComponent({
+  components: {
+    Chart,
+  },
+  data() {
+    return {
+      avgSkillBonus: 3,
+      skillCheckDc: 14,
+      successes: 4,
+      failures: 3,
+      msg: "",
+    }
+  },
+  methods: {
+    formSubmit(e: any) {
+      e.preventDefault();
 
-  formSubmit(e: any) {
-    e.preventDefault();
+      axios
+        .get(process.env.VUE_APP_API_URL, {
+          params: {
+            skillBonus: this.avgSkillBonus,
+            dc: this.skillCheckDc,
+            successes: this.successes,
+            failures: this.failures
+          }
+        })
+        .then(function(this: any, response: any) {
+          this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
+        })
+        .catch(function(this: any, err: any) {
+          this.msg = err;
+        });
 
-    axios
-      .get(process.env.VUE_APP_API_URL, {
-        params: {
-          skillBonus: this.avgSkillBonus,
-          dc: this.skillCheckDc,
-          successes: this.successes,
-          failures: this.failures
-        }
-      })
-      .then((response: any) => {
-        this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
-      })
-      .catch((err: any) => {
-        this.msg = err;
-      });
-
-    return false;
+      return false;
+    }
   }
-}
+})
 
 </script>
 
