@@ -5,3 +5,5 @@ services:
   frontend:
     build:
       dockerfile: prod.Dockerfile
+    environment:
+      - ACCESS_CONTROL_ALLOW_ORIGIN=https://skillcalc5e.cc
