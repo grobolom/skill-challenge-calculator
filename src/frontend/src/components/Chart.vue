@@ -12,7 +12,9 @@ export default {
   data () {
     return {}
   },
-  mounted () {
+  updated () {
+    d3.selectAll("#viz > *").remove();
+
     const svg = d3.select('#viz')
                   .attr('font-family', 'sans-serif')
                   .attr('font-size', 10);
@@ -35,7 +37,7 @@ export default {
 
     const line = d3.line()
                    .x(d => x(d.successes))
-                   .y(d => y(d.percent))
+                   .y(d => y(d.probability * 100))
 
     const xAxisCall = d3.axisBottom(x)
     const xAxis = g.append("g")
@@ -75,7 +77,7 @@ export default {
      .data(this.info)
      .join("circle")
      .attr("cx", d => x(d.successes))
-     .attr("cy", d => y(d.percent))
+     .attr("cy", d => y(d.probability * 100))
      .attr("r", 12)
 
     // this is the percentages as text on the chart
@@ -85,9 +87,9 @@ export default {
      .data(this.info)
      .join('text')
      .attr('x', d => x(d.successes))
-     .attr('y', d => y(d.percent))
+     .attr('y', d => y(d.probability * 100))
      .attr('dy', '0.35em')
-     .text(d => d.percent)
+     .text(d => (d.probability * 100).toFixed(1))
   }
 }
 </script>

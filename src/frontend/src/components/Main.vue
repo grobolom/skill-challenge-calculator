@@ -74,39 +74,39 @@ export default defineComponent({
       info: [
         {
           successes: 3,
-          percent: 50.0,
+          probability: .500,
         },
         {
           successes: 4,
-          percent: 34.3,
+          probability: .343,
         },
         {
           successes: 5,
-          percent: 22.6
+          probability: .226
         },
         {
           successes: 6,
-          percent: 14.4
+          probability: .114
         },
         {
           successes: 7,
-          percent: 8.9
+          probability: .089
         },
         {
           successes: 8,
-          percent: 5.4
+          probability: .054
         },
         {
           successes: 9,
-          percent: 3.2
+          probability: .032
         },
         {
           successes: 10,
-          percent: 1.9
+          probability: .019
         },
         {
           successes: 11,
-          percent: 1.1
+          probability: .011
         },
       ]
     }
@@ -126,10 +126,11 @@ export default defineComponent({
         })
         .then((response: any) => {
           console.log(response)
+          this.info = response.data
           // this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
         })
         .catch((err: any) => {
-          // this.msg = err;
+          this.msg = err;
         });
 
       return false;
