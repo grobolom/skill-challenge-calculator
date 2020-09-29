@@ -10,7 +10,8 @@ import (
 
 // Probability represents the probably response based on the input
 type Probability struct {
-	ChanceOfSuccess float64 `json:"ChanceOfSuccess"`
+	ChanceOfSuccess float64 `json:"probability"`
+	Successes       int     `json:"successes"`
 }
 
 func enableCors(w *http.ResponseWriter) {
@@ -54,7 +55,7 @@ func ProbabilityHandler(w http.ResponseWriter, r *http.Request) {
 
 	probability := math.Min(float64(21-(DC-skillBonus))/20, 1)
 
-	result := Probability{CalculateTotalProbability(successes, failures, probability)}
+	result := Probability{CalculateTotalProbability(successes, failures, probability), successes}
 
 	json.NewEncoder(w).Encode(result)
 }
@@ -100,7 +101,7 @@ func GetProbabilityRange(successRange []int, failures int, probability float64) 
 	var pr = []Probability{}
 
 	for i := 0; i < len(successRange); i++ {
-		pr = append(pr, Probability{CalculateTotalProbability(successRange[i], failures, probability)})
+		pr = append(pr, Probability{CalculateTotalProbability(successRange[i], failures, probability), successRange[i]})
 	}
 
 	return pr

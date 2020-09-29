@@ -35,12 +35,12 @@ func TestGetProbabilityRange(t *testing.T) {
 
 	result := GetProbabilityRange(r, 3, 0.5)
 
-	expected := Probability{0.6875}
+	expected := Probability{0.6875, 2}
 	if result[0] != expected {
 		t.Errorf("Probabilities were incorrect, got: %v, want: %v.", result[0], 0.6875)
 	}
 
-	expected = Probability{0.5}
+	expected = Probability{0.5, 3}
 	if result[1] != expected {
 		t.Errorf("Probabilities were incorrect, got: %v, want: %v.", result[1], 0.5)
 	}
