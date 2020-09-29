@@ -8,49 +8,11 @@
 import * as d3 from 'd3'
 
 export default {
+  props: ['info'],
   data () {
     return {}
   },
   mounted () {
-    const data = [
-      {
-        successes: 3,
-        percent: 50.0,
-      },
-      {
-        successes: 4,
-        percent: 34.3,
-      },
-      {
-        successes: 5,
-        percent: 22.6
-      },
-      {
-        successes: 6,
-        percent: 14.4
-      },
-      {
-        successes: 7,
-        percent: 8.9
-      },
-      {
-        successes: 8,
-        percent: 5.4
-      },
-      {
-        successes: 9,
-        percent: 3.2
-      },
-      {
-        successes: 10,
-        percent: 1.9
-      },
-      {
-        successes: 11,
-        percent: 1.1
-      },
-    ]
-
     const svg = d3.select('#viz')
                   .attr('font-family', 'sans-serif')
                   .attr('font-size', 10);
@@ -100,7 +62,7 @@ export default {
          .attr("fill", "currentColor")
 
     g.append('path')
-     .attr('d', line(data))
+     .attr('d', line(this.info))
      .attr('fill', 'none')
      .attr('stroke', 'rgb(0 0 0)')
      .attr('stroke-width', 1)
@@ -110,7 +72,7 @@ export default {
     g.append("g")
      .attr("fill", "#fff")
      .selectAll("circle")
-     .data(data)
+     .data(this.info)
      .join("circle")
      .attr("cx", d => x(d.successes))
      .attr("cy", d => y(d.percent))
@@ -120,7 +82,7 @@ export default {
     g.append('g')
      .attr('text-anchor', 'middle')
      .selectAll('text')
-     .data(data)
+     .data(this.info)
      .join('text')
      .attr('x', d => x(d.successes))
      .attr('y', d => y(d.percent))

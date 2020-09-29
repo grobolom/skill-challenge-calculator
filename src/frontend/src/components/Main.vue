@@ -18,7 +18,7 @@
             calculate the exact chance of success for parties with
             extremely varied skill bonuses.
           </p>
-          <Chart />
+          <Chart v-bind:info="info" />
         </div>
         <div class="hero-image col-start-7 col-span-6">
           <form @change="formSubmit">
@@ -71,6 +71,44 @@ export default defineComponent({
       successes: 4,
       failures: 3,
       msg: "",
+      info: [
+        {
+          successes: 3,
+          percent: 50.0,
+        },
+        {
+          successes: 4,
+          percent: 34.3,
+        },
+        {
+          successes: 5,
+          percent: 22.6
+        },
+        {
+          successes: 6,
+          percent: 14.4
+        },
+        {
+          successes: 7,
+          percent: 8.9
+        },
+        {
+          successes: 8,
+          percent: 5.4
+        },
+        {
+          successes: 9,
+          percent: 3.2
+        },
+        {
+          successes: 10,
+          percent: 1.9
+        },
+        {
+          successes: 11,
+          percent: 1.1
+        },
+      ]
     }
   },
   methods: {
@@ -78,7 +116,7 @@ export default defineComponent({
       e.preventDefault();
 
       axios
-        .get(process.env.VUE_APP_API_URL, {
+        .get(process.env.VUE_APP_API_URL + "/v2", {
           params: {
             skillBonus: this.avgSkillBonus,
             dc: this.skillCheckDc,
@@ -87,17 +125,17 @@ export default defineComponent({
           }
         })
         .then((response: any) => {
-          this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
+          console.log(response)
+          // this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
         })
         .catch((err: any) => {
-          this.msg = err;
+          // this.msg = err;
         });
 
       return false;
     }
   }
 })
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
