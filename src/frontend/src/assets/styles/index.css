@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Libre Baskerville', sans-serif;
+}
+
 .label {
   @apply text-gray-700 text-sm font-bold mb-2 float-left;
 }
