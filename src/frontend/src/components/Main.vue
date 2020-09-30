@@ -18,7 +18,6 @@
             calculate the exact chance of success for parties with
             extremely varied skill bonuses.
           </p>
-          <Chart v-bind:info="info" />
         </div>
         <div class="hero-image col-start-7 col-span-6">
           <form @change="formSubmit">
@@ -44,10 +43,7 @@
 
             <hr class="w-12 h-1 bg-orange-500 mt-8 mb-8">
 
-            <div class="mb-4">
-              <label class="label" for="chance_of_success">Chance of Success</label >
-              <input class="number-input" id="chance_of_success" name="chance_of_success" type="text" readonly :value="msg" />
-            </div>
+            <Chart v-bind:info="info" />
           </form>
         </div>
       </div>
@@ -120,17 +116,14 @@ export default defineComponent({
           params: {
             skillBonus: this.avgSkillBonus,
             dc: this.skillCheckDc,
-            successes: this.successes,
             failures: this.failures
           }
         })
         .then((response: any) => {
-          console.log(response)
           this.info = response.data
-          // this.msg = +(response.data["ChanceOfSuccess"] * 100).toFixed(1) + "%";
         })
         .catch((err: any) => {
-          this.msg = err;
+          console.error(err)
         });
 
       return false;
