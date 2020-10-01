@@ -5,23 +5,3 @@
 * {
   font-family: 'Libre Baskerville', sans-serif;
 }
-
-.label {
-  @apply text-gray-700 text-sm font-bold mb-2 float-left;
-}
-
-.number-input {
-  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
-}
-
-.number-input:focus {
-  @apply outline-none shadow-outline;
-}
-
-.btn-submit {
-  @apply bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow;
-}
-
-.btn-submit:hover {
-  @apply bg-gray-100;
-}
