@@ -2,7 +2,7 @@
   <div class="main">
     <div class="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-        <div class="hero-text col-start-1 col-span-5 text-left">
+        <div class="hero-text col-span-12">
           <h1 class="font-bold text-4xl md:text-5xl max-w-xl text-gray-900 leading-tight">
             Skill Challenge Calculator
           </h1>
@@ -21,14 +21,13 @@
 
           <hr class="w-12 h-1 bg-orange-500 rounded-full mt-8 mb-8">
 
-          <NumberInput name="Skill Bonus" v-bind:startValue="skillBonus" v-bind:increment="incrementSkillBonus" />
-          <NumberInput name="Check DC" v-bind:startValue="checkDC" />
-          <NumberInput name="Failures" v-bind:startValue="failures" />
-        </div>
-        <div class="hero-image col-start-7 col-span-6 mt-16">
-          <form @change="formSubmit">
-            <Chart v-bind:info="info" />
-          </form>
+          <NumberInput name="Skill Bonus" value="5" />
+          <NumberInput name="Check DC" value="16" />
+          <NumberInput name="Failures" value="3" />
+
+          <hr class="w-12 h-1 bg-orange-500 rounded-full mt-8 mb-8">
+
+          <Chart v-bind:info="info" />
         </div>
       </div>
     </div>
@@ -36,11 +35,9 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios'
 import { defineComponent } from 'vue'
 import Chart from './Chart.vue'
 import NumberInput from './NumberInput.vue'
-import createStore from '../store/index'
 
 export default defineComponent({
   components: {
@@ -48,55 +45,53 @@ export default defineComponent({
     NumberInput,
   },
   setup () {
-    const store = createStore
-
-    const skillBonus = store.state.skillBonus
-    const checkDC = store.state.checkDC
-    const failures = store.state.failures
+    const skillBonus = 4
+    const checkDC = 15
+    const failures = 3
+    const info = [
+      {
+        successes: 3,
+        probability: 0.500,
+      },
+      {
+        successes: 4,
+        probability: 0.343,
+      },
+      {
+        successes: 5,
+        probability: 0.226,
+      },
+      {
+        successes: 6,
+        probability: 0.114,
+      },
+      {
+        successes: 7,
+        probability: 0.089
+      },
+      {
+        successes: 8,
+        probability: 0.054,
+      },
+      {
+        successes: 9,
+        probability: 0.032,
+      },
+      {
+        successes: 10,
+        probability: 0.019,
+      },
+      {
+        successes: 11,
+        probability: 0.011,
+      },
+    ]
 
     return {
       skillBonus,
       checkDC,
       failures,
-      incrementSkillBonus: store.mutations.incrementSkillBonus
-      info: [
-        {
-          successes: 3,
-          probability: .500,
-        },
-        {
-          successes: 4,
-          probability: .343,
-        },
-        {
-          successes: 5,
-          probability: .226
-        },
-        {
-          successes: 6,
-          probability: .114
-        },
-        {
-          successes: 7,
-          probability: .089
-        },
-        {
-          successes: 8,
-          probability: .054
-        },
-        {
-          successes: 9,
-          probability: .032
-        },
-        {
-          successes: 10,
-          probability: .019
-        },
-        {
-          successes: 11,
-          probability: .011
-        },
-      ]
+      info,
     }
   }
 })

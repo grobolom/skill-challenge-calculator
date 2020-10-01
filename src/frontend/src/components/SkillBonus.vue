@@ -1,15 +1,11 @@
 <template>
   <div>
-    <NumberInput
-      name="Skill Bonus"
-      v-bind:value="skillBonus"
-      />
+    <NumberInput name="Skill Bonus" />
   </div>
 </template>
 
 <script type='ts'>
   import NumberInput from './NumberInput.vue'
-  import store from '../store/index'
 
   export default {
     props: {
@@ -18,12 +14,6 @@
       increment: Function,
       decrement: Function,
     },
-    setup() {
-      console.log(this.store)
-      const store = createStore
-
-      console.log(createStore.mutations)
-    }
   }
 </script>
 

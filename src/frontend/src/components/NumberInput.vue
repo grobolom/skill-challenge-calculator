@@ -8,8 +8,6 @@
 </template>
 
 <script type='ts'>
-  import { ref } from 'vue'
-
   export default {
     props: {
       name: String,
