@@ -7,7 +7,7 @@
 }
 
 .footer {
-  @apply mt-8 text-xs bg-gray-800 py-4 text-left px-4 text-white
+  @apply text-xs bg-gray-800 py-2 text-left px-2 text-white fixed top-0 right-0
 }
 
 .footer a {
@@ -15,6 +15,5 @@
 }
 
 .footer p {
-  @apply mt-2;
   font-size: 10px;
 }
