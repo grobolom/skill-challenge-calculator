@@ -1,5 +1,5 @@
 <template>
-  <div class='items-center'>
+  <div class='wrapper'>
     <label class="label">{{ name }}</label>
     <button class='button left-button' v-on:click="decrement">-</button>
     <input class='number' type='number' v-bind:value="value" />
@@ -19,9 +19,9 @@
 </script>
 
 <style scoped lang="postcss">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.wrapper {
+  @apply items-center mt-1
+}
 
 .button {
   @apply inline-block w-1/6 py-2 text-sm uppercase tracking-wider font-semibold;
@@ -37,9 +37,10 @@
 }
 
 .label {
-  @apply inline-block w-1/2 py-2 text-sm uppercase font-semibold text-left float-none;
+  @apply inline-block w-1/2 py-2 text-sm font-semibold text-left float-none;
 }
 
+/* remove the webkit up and down arrows for the number inputs */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;

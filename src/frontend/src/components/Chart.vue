@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr v-for="item in info" :key="item.successes" class='row'>
-          <td>
+          <td class="row-left">
             {{ item.successes }}
           </td>
           <td>
@@ -41,6 +41,10 @@ export default {
 }
 
 .row:nth-child(2n + 1) {
-  @apply bg-gray-400
+  @apply bg-gray-200
+}
+
+.row-left {
+  @apply border-r border-gray-600
 }
 </style>

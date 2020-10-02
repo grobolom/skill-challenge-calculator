@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <Main msg=""/>
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import Main from './components/Main.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   components: {
     Main,
+    Footer,
   }
 }
 </script>
