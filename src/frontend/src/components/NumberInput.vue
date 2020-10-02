@@ -12,8 +12,14 @@
     props: {
       name: String,
       value: Number,
-      increment: Function,
-      decrement: Function,
+    },
+    methods: {
+      increment() {
+        this.$emit('onIncrement')
+      },
+      decrement() {
+        this.$emit('onDecrement')
+      }
     }
   }
 </script>

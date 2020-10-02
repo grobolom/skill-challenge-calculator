@@ -23,14 +23,16 @@
             </div>
 
             <div class='block inputs md:w-1/2 md:inline-block'>
-              <NumberInput name="Skill Bonus" value="5" />
-              <NumberInput name="Check DC" value="16" />
-              <NumberInput name="Failures" value="3" />
+              <NumberInput name="Skill Bonus" v-bind:value="skillBonus" @onIncrement="incrementSkillBonus" @onDecrement="decrementSkillBonus" />
+              <NumberInput name="Check DC" v-bind:value="checkDC" @onIncrement="incrementCheckDC" @onDecrement="decrementCheckDC" />
+              <NumberInput name="Failures" v-bind:value="failures" @onIncrement="incrementFailures" @onDecrement="decrementFailures" />
             </div>
           </div>
 
           <div class='chart'>
-            <Chart v-bind:info="info" />
+            <Suspense>
+              <Chart :skillBonus="skillBonus" :checkDC="checkDC" :failures="failures" />
+            </Suspense>
           </div>
         </div>
       </div>
@@ -39,66 +41,65 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import Chart from './Chart.vue'
 import NumberInput from './NumberInput.vue'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
 
-export default defineComponent({
+export default {
   components: {
     Chart,
     NumberInput,
   },
   setup () {
-    const skillBonus = 4
-    const checkDC = 15
-    const failures = 3
-    const info = [
-      {
-        successes: 3,
-        probability: 0.500,
-      },
-      {
-        successes: 4,
-        probability: 0.343,
-      },
-      {
-        successes: 5,
-        probability: 0.226,
-      },
-      {
-        successes: 6,
-        probability: 0.114,
-      },
-      {
-        successes: 7,
-        probability: 0.089
-      },
-      {
-        successes: 8,
-        probability: 0.054,
-      },
-      {
-        successes: 9,
-        probability: 0.032,
-      },
-      {
-        successes: 10,
-        probability: 0.019,
-      },
-      {
-        successes: 11,
-        probability: 0.011,
-      },
-    ]
+    const store = useStore()
+
+    const skillBonus = computed(() => store.state.skillBonus)
+    const checkDC = computed(() => store.state.checkDC)
+    const failures = computed(() => store.state.failures)
+
+    const skref = ref(skillBonus)
+
+    function incrementSkillBonus() {
+      store.dispatch('incrementSkillBonus')
+    }
+
+    function decrementSkillBonus() {
+      store.dispatch('decrementSkillBonus')
+    }
+
+    function incrementCheckDC() {
+      store.dispatch('incrementCheckDC')
+    }
+
+    function decrementCheckDC() {
+      store.dispatch('decrementCheckDC')
+    }
+
+    function incrementFailures() {
+      store.dispatch('incrementFailures')
+    }
+
+    function decrementFailures() {
+      store.dispatch('decrementFailures')
+    }
 
     return {
       skillBonus,
+      skref,
+      incrementSkillBonus,
+      decrementSkillBonus,
+
       checkDC,
+      incrementCheckDC,
+      decrementCheckDC,
+
       failures,
-      info,
+      incrementFailures,
+      decrementFailures,
     }
   }
-})
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
