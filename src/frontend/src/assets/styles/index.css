@@ -7,7 +7,7 @@
 }
 
 .footer {
-  @apply text-xs bg-gray-800 py-2 text-left px-2 text-white fixed top-0 right-0
+  @apply text-xs bg-gray-800 py-2 text-left px-2 text-white fixed top-0 right-0 rounded-bl-lg
 }
 
 .footer a {
@@ -15,5 +15,5 @@
 }
 
 .footer p {
-  font-size: 10px;
+  font-size: 12px;
 }

@@ -58,8 +58,6 @@ export default {
     const checkDC = computed(() => store.state.checkDC)
     const failures = computed(() => store.state.failures)
 
-    const skref = ref(skillBonus)
-
     function incrementSkillBonus() {
       store.dispatch('incrementSkillBonus')
     }
@@ -86,7 +84,6 @@ export default {
 
     return {
       skillBonus,
-      skref,
       incrementSkillBonus,
       decrementSkillBonus,
 
