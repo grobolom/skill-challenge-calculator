@@ -1,9 +1,9 @@
 <template>
   <div class='wrapper'>
     <label class="label">{{ name }}</label>
-    <button class='button left-button' v-on:click="decrement">-</button>
-    <input class='number' type='number' :value="value" v-on:change="change" />
-    <button class='button right-button' v-on:click="increment">+</button>
+    <button class='button left-button' tabindex="-1" v-on:click="decrement">-</button>
+    <input class='number' tabindex="0" type='number' :value="value" v-on:change="change" />
+    <button class='button right-button' tabindex="-1" v-on:click="increment">+</button>
   </div>
 </template>
 
