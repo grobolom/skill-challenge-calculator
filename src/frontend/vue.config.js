@@ -6,5 +6,13 @@ module.exports = {
   // don't set the scheme (duh) because it's a host, not a fqdn
   devServer: {
     public: 'skillcalc5e.cc'
+  },
+
+  // only done for the title right now
+  pages: {
+    index: {
+      entry: 'src/main.ts',
+      title: '5e Skill Challenge Calculator'
+    }
   }
 }
