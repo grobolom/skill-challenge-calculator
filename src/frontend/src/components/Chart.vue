@@ -26,35 +26,13 @@
 </template>
 
 <script type='ts'>
-import { ref } from 'vue'
-import axios from 'axios'
-import { onUpdated } from 'vue'
-
-async function getData(skillBonus, checkDC, failures) {
-  const response = await axios.get(
-    process.env.VUE_APP_API_URL + "/v2",
-    {
-      params: {
-        skillBonus: skillBonus,
-        failures: failures,
-        dc: checkDC,
-      }
-    }
-  )
-
-  return response.data
-}
+import { computed } from 'vue'
+import getSuccesses from '@/math/successes'
 
 export default {
   props: ['skillBonus', 'checkDC', 'failures'],
-  async setup(props) {
-    const info = ref(null)
-
-    onUpdated(async () => {
-      info.value = await getData(props.skillBonus, props.checkDC, props.failures)
-    })
-
-    info.value = await getData(props.skillBonus, props.checkDC, props.failures)
+  setup(props) {
+    const info = computed(() => getSuccesses(props.skillBonus, props.checkDC, props.failures))
 
     return {
       info

@@ -55,15 +55,12 @@ export default createStore({
       commit('decrementFailures')
     },
     setSkillBonus({ commit }, newValue) {
-      console.log('set skill bonus', newValue)
       commit('setSkillBonus', newValue)
     },
     setCheckDC({ commit }, newValue) {
-      console.log('set check dc', newValue)
       commit('setCheckDC', newValue)
     },
     setFailures({ commit }, newValue) {
-      console.log('set failures', newValue)
       commit('setFailures', newValue)
     },
   },

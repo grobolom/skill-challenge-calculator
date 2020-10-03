@@ -30,9 +30,7 @@
           </div>
 
           <div class='chart'>
-            <Suspense>
-              <Chart :skillBonus="skillBonus" :checkDC="checkDC" :failures="failures" />
-            </Suspense>
+            <Chart :skillBonus="skillBonus" :checkDC="checkDC" :failures="failures" />
           </div>
         </div>
       </div>
