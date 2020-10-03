@@ -23,9 +23,24 @@
             </div>
 
             <div class='block inputs md:w-1/2 md:inline-block'>
-              <NumberInput name="Skill Bonus" v-bind:value="skillBonus" @on-increment="incrementSkillBonus" @on-decrement="decrementSkillBonus" @on-change="setSkillBonus" />
-              <NumberInput name="Check DC" v-bind:value="checkDC" @on-increment="incrementCheckDC" @on-decrement="decrementCheckDC" @on-change="setCheckDC" />
-              <NumberInput name="Failures" v-bind:value="failures" @on-increment="incrementFailures" @on-decrement="decrementFailures" @on-change="setFailures" />
+              <NumberInput
+                name="Skill Bonus"
+                v-bind:value="skillBonus"
+                @on-increment="incrementSkillBonus"
+                @on-decrement="decrementSkillBonus"
+                @on-change="setSkillBonus" />
+              <NumberInput
+                name="Check DC"
+                v-bind:value="checkDC"
+                @on-increment="incrementCheckDC"
+                @on-decrement="decrementCheckDC"
+                @on-change="setCheckDC" />
+              <NumberInput
+                name="Failures"
+                v-bind:value="failures"
+                @on-increment="incrementFailures"
+                @on-decrement="decrementFailures"
+                @on-change="setFailures" />
             </div>
           </div>
 
@@ -125,5 +140,4 @@ export default {
 .inputs {
   @apply px-8
 }
-
 </style>

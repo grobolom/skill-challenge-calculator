@@ -1,9 +1,9 @@
 <template>
   <div class='wrapper'>
     <label class="label">{{ name }}</label>
-    <button class='button left-button' tabindex="-1" v-on:click="decrement">-</button>
-    <input class='number' tabindex="0" type='number' :value="value" v-on:change="change" />
-    <button class='button right-button' tabindex="-1" v-on:click="increment">+</button>
+    <button class='button left-button' tabindex="-1" v-on:click="$emit('on-decrement')">-</button>
+    <input class='number' type='number' :value="value" v-on:change="$emit('on-change', $event.target.value)" />
+    <button class='button right-button' tabindex="-1" v-on:click="$emit('on-increment')">+</button>
   </div>
 </template>
 
@@ -13,17 +13,6 @@
       name: String,
       value: Number,
     },
-    methods: {
-      increment() {
-        this.$emit('on-increment')
-      },
-      decrement() {
-        this.$emit('on-decrement')
-      },
-      change(event) {
-        this.$emit('on-change', event.target.value)
-      }
-    }
   }
 </script>
 
@@ -47,16 +36,5 @@
 
 .label {
   @apply inline-block w-1/2 py-2 text-sm font-semibold text-left float-none;
-}
-
-/* remove the webkit up and down arrows for the number inputs */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance:textfield;
 }
 </style>
