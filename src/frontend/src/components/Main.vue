@@ -23,9 +23,9 @@
             </div>
 
             <div class='block inputs md:w-1/2 md:inline-block'>
-              <NumberInput name="Skill Bonus" v-bind:value="skillBonus" @onIncrement="incrementSkillBonus" @onDecrement="decrementSkillBonus" />
-              <NumberInput name="Check DC" v-bind:value="checkDC" @onIncrement="incrementCheckDC" @onDecrement="decrementCheckDC" />
-              <NumberInput name="Failures" v-bind:value="failures" @onIncrement="incrementFailures" @onDecrement="decrementFailures" />
+              <NumberInput name="Skill Bonus" v-bind:value="skillBonus" @on-increment="incrementSkillBonus" @on-decrement="decrementSkillBonus" @on-change="setSkillBonus" />
+              <NumberInput name="Check DC" v-bind:value="checkDC" @on-increment="incrementCheckDC" @on-decrement="decrementCheckDC" @on-change="setCheckDC" />
+              <NumberInput name="Failures" v-bind:value="failures" @on-increment="incrementFailures" @on-decrement="decrementFailures" @on-change="setFailures" />
             </div>
           </div>
 
@@ -43,7 +43,7 @@
 <script lang="ts">
 import Chart from './Chart.vue'
 import NumberInput from './NumberInput.vue'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -82,18 +82,33 @@ export default {
       store.dispatch('decrementFailures')
     }
 
+    function setSkillBonus (value: number) {
+      store.dispatch('setSkillBonus', value)
+    }
+
+    function setCheckDC (value: number) {
+      store.dispatch('setCheckDC', value)
+    }
+
+    function setFailures (value: number) {
+      store.dispatch('setFailures', value)
+    }
+
     return {
       skillBonus,
       incrementSkillBonus,
       decrementSkillBonus,
+      setSkillBonus,
 
       checkDC,
       incrementCheckDC,
       decrementCheckDC,
+      setCheckDC,
 
       failures,
       incrementFailures,
       decrementFailures,
+      setFailures,
     }
   }
 }

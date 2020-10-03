@@ -25,6 +25,15 @@ export default createStore({
     decrementFailures (state) {
       state.failures = (state.failures == 0) ? 0 : state.failures - 1
     },
+    setSkillBonus (state, newValue: number) {
+      state.skillBonus = (newValue < 0) ? 0 : newValue
+    },
+    setCheckDC (state, newValue: number) {
+      state.checkDC = (newValue < 0) ? 0 : newValue
+    },
+    setFailures (state, newValue: number) {
+      state.failures = (newValue < 0) ? 0 : newValue
+    },
   },
   actions: {
     incrementSkillBonus({ commit }) {
@@ -44,7 +53,19 @@ export default createStore({
     },
     decrementFailures({ commit }) {
       commit('decrementFailures')
-    }
+    },
+    setSkillBonus({ commit }, newValue) {
+      console.log('set skill bonus', newValue)
+      commit('setSkillBonus', newValue)
+    },
+    setCheckDC({ commit }, newValue) {
+      console.log('set check dc', newValue)
+      commit('setCheckDC', newValue)
+    },
+    setFailures({ commit }, newValue) {
+      console.log('set failures', newValue)
+      commit('setFailures', newValue)
+    },
   },
   modules: {
   }

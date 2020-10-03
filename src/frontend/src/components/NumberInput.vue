@@ -2,7 +2,7 @@
   <div class='wrapper'>
     <label class="label">{{ name }}</label>
     <button class='button left-button' v-on:click="decrement">-</button>
-    <input class='number' type='number' v-bind:value="value" />
+    <input class='number' type='number' :value="value" v-on:change="change" />
     <button class='button right-button' v-on:click="increment">+</button>
   </div>
 </template>
@@ -15,10 +15,13 @@
     },
     methods: {
       increment() {
-        this.$emit('onIncrement')
+        this.$emit('on-increment')
       },
       decrement() {
-        this.$emit('onDecrement')
+        this.$emit('on-decrement')
+      },
+      change(event) {
+        this.$emit('on-change', event.target.value)
       }
     }
   }
