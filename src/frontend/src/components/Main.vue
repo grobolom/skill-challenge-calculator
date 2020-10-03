@@ -8,7 +8,7 @@
           </h1>
 
           <div class='blocks md:flex px-8 md:items-start'>
-            <div class='block md:w-1/2 md:inline-block text-base text-left md:text-xs'>
+            <div class='block md:w-1/2 md:inline-block text-base text-left text-xs md:text-sm'>
               <p class="text-gray-800 leading-relaxed">
                 Select your party's skill bonus, skill check DC, successes, and failures for the
                 <a class='text-blue-400' href='https://www.youtube.com/watch?v=GvOeqDpkBm8'>Skill Challenge</a>
