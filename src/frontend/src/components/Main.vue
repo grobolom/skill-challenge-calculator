@@ -25,19 +25,19 @@
             <div class='block inputs md:w-1/2 md:inline-block'>
               <NumberInput
                 name="Skill Bonus"
-                v-bind:value="skillBonus"
+                :value="skillBonus"
                 @on-increment="incrementSkillBonus"
                 @on-decrement="decrementSkillBonus"
                 @on-change="setSkillBonus" />
               <NumberInput
                 name="Check DC"
-                v-bind:value="checkDC"
+                :value="checkDC"
                 @on-increment="incrementCheckDC"
                 @on-decrement="decrementCheckDC"
                 @on-change="setCheckDC" />
               <NumberInput
                 name="Failures"
-                v-bind:value="failures"
+                :value="failures"
                 @on-increment="incrementFailures"
                 @on-decrement="decrementFailures"
                 @on-change="setFailures" />
@@ -45,7 +45,10 @@
           </div>
 
           <div class='chart'>
-            <Chart :skillBonus="skillBonus" :checkDC="checkDC" :failures="failures" />
+            <Chart
+              :skillBonus="skillBonus"
+              :checkDC="checkDC"
+              :failures="failures" />
           </div>
         </div>
       </div>
@@ -127,7 +130,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="postcss">
 .block {
   @apply border-t pt-8 mt-8 border-yellow-500

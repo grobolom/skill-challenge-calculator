@@ -18,10 +18,6 @@
 </script>
 
 <style scoped lang="postcss">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .button {
   @apply inline-block w-1/6 py-2 text-sm uppercase tracking-wider font-semibold;
   @apply bg-gray-400;
