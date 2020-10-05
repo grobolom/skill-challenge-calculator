@@ -1,34 +1,14 @@
-# frontend
+# Front-End
 
-## Project setup
-```
-yarn install
-```
+This is the front-end package for the skill challenge calculation. It is written
+in Vue, and important libraries include Vuex and Tailwind CSS
 
-### Compiles and hot-reloads for development
+## Setup instructions
+```bash
+yarn install # project setup
+yarn serve # Compiles and hot-reloads for development
+yarn build # Compiles and minifies for production
+yarn test:unit # Run your unit tests
+yarn test:e2e # Run your end-to-end tests
+yarn lint # Lints and fixes files
 ```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
