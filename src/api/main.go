@@ -12,48 +12,9 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", os.Getenv("ACCESS_CONTROL_ALLOW_ORIGIN"))
 }
 
-// ProbabilityHandler just sends a dummy response for now
-func ProbabilityHandler(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-
-	successes := 4
-	failures := 3
-	DC := 5
-	skillBonus := 1
-	var err error
-
-	formSuccesses := r.FormValue("successes")
-	formFailures := r.FormValue("failures")
-	formSkillBonus := r.FormValue("skillBonus")
-	formDC := r.FormValue("dc")
-
-	if formSuccesses != "" {
-		successes, err = strconv.Atoi(formSuccesses)
-	}
-
-	if formFailures != "" {
-		failures, err = strconv.Atoi(formFailures)
-	}
-
-	if formDC != "" {
-		DC, err = strconv.Atoi(formDC)
-	}
-
-	if formSkillBonus != "" {
-		skillBonus, err = strconv.Atoi(formSkillBonus)
-	}
-
-	// for now, it's fine to ignore this shit
-	if err != nil {
-	}
-
-	baseProbability := math.Min(float64(21-(DC-skillBonus))/20, 1)
-
-	result := Probability{CalculateTotalProbability(successes, failures, baseProbability), successes}
-
-	json.NewEncoder(w).Encode(result)
-}
-
+// ProbabilityRangeHandler sends back an array of objects that represent the probability
+// of success for each number of successes, based on the skill bonus, check DC, and number
+// of failures.
 func ProbabilityRangeHandler(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 
@@ -79,10 +40,11 @@ func ProbabilityRangeHandler(w http.ResponseWriter, r *http.Request) {
 		skillBonus, err = strconv.Atoi(formSkillBonus)
 	}
 
-	// for now, it's fine to ignore this shit
+	// I don't care about handling this for now
 	if err != nil {
 	}
 
+	// this calculation should be moved out of this handler
 	baseProbability := math.Min(float64(21-(DC-skillBonus))/20, 1)
 
 	result := GetProbabilityRange(successes, failures, baseProbability)
@@ -91,7 +53,6 @@ func ProbabilityRangeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", ProbabilityHandler)
 	http.HandleFunc("/v2", ProbabilityRangeHandler)
 	http.ListenAndServe(":5051", nil)
 }
