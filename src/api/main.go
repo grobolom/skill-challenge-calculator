@@ -6,13 +6,9 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-)
 
-// Probability represents the probably response based on the input
-type Probability struct {
-	ChanceOfSuccess float64 `json:"probability"`
-	Successes       int     `json:"successes"`
-}
+	"github.com/grobolom/skill-challenge-calculator/src/api/probability"
+)
 
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", os.Getenv("ACCESS_CONTROL_ALLOW_ORIGIN"))
@@ -53,9 +49,9 @@ func ProbabilityHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 	}
 
-	probability := math.Min(float64(21-(DC-skillBonus))/20, 1)
+	baseProbability := math.Min(float64(21-(DC-skillBonus))/20, 1)
 
-	result := Probability{CalculateTotalProbability(successes, failures, probability), successes}
+	result := probability.Probability{probability.CalculateTotalProbability(successes, failures, baseProbability), successes}
 
 	json.NewEncoder(w).Encode(result)
 }
@@ -89,53 +85,11 @@ func ProbabilityRangeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 	}
 
-	probability := math.Min(float64(21-(DC-skillBonus))/20, 1)
+	baseProbability := math.Min(float64(21-(DC-skillBonus))/20, 1)
 
-	result := GetProbabilityRange(successes, failures, probability)
+	result := probability.GetProbabilityRange(successes, failures, baseProbability)
 
 	json.NewEncoder(w).Encode(result)
-}
-
-// GetProbabilityRange gets a series of probabilities for different counts of successes
-func GetProbabilityRange(successRange []int, failures int, probability float64) []Probability {
-	var pr = []Probability{}
-
-	for i := 0; i < len(successRange); i++ {
-		pr = append(pr, Probability{CalculateTotalProbability(successRange[i], failures, probability), successRange[i]})
-	}
-
-	return pr
-}
-
-// Factorial does something
-func Factorial(integer int) int {
-	sum := 1
-
-	for i := 1; i <= integer; i++ {
-		sum = i * sum
-	}
-
-	return sum
-}
-
-// CalculateProbability does something
-func CalculateProbability(successes int, trials int, probability float64) float64 {
-	firstTerm := Factorial(trials-1) / (Factorial(successes-1) * Factorial(trials-successes))
-	secondTerm := math.Pow(probability, float64(successes))
-	thirdTerm := math.Pow(1-probability, float64(trials-successes))
-
-	return float64(firstTerm) * secondTerm * thirdTerm
-}
-
-// CalculateTotalProbability does something
-func CalculateTotalProbability(successes int, failures int, probability float64) float64 {
-	var sum float64
-
-	for i := 0; i < failures; i++ {
-		sum += CalculateProbability(successes, successes+i, probability)
-	}
-
-	return sum
 }
 
 func main() {
