@@ -1,6 +1,8 @@
 #!/bin/sh
+# used for production deployment - pull, build, run
 
 cd src
 
+git fetch
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
