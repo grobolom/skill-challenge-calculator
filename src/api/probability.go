@@ -1,4 +1,4 @@
-package probability
+package main
 
 import "math"
 

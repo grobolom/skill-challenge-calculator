@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-
-	"github.com/grobolom/skill-challenge-calculator/src/api/probability"
 )
 
 func enableCors(w *http.ResponseWriter) {
@@ -51,7 +49,7 @@ func ProbabilityHandler(w http.ResponseWriter, r *http.Request) {
 
 	baseProbability := math.Min(float64(21-(DC-skillBonus))/20, 1)
 
-	result := probability.Probability{probability.CalculateTotalProbability(successes, failures, baseProbability), successes}
+	result := Probability{CalculateTotalProbability(successes, failures, baseProbability), successes}
 
 	json.NewEncoder(w).Encode(result)
 }
@@ -87,7 +85,7 @@ func ProbabilityRangeHandler(w http.ResponseWriter, r *http.Request) {
 
 	baseProbability := math.Min(float64(21-(DC-skillBonus))/20, 1)
 
-	result := probability.GetProbabilityRange(successes, failures, baseProbability)
+	result := GetProbabilityRange(successes, failures, baseProbability)
 
 	json.NewEncoder(w).Encode(result)
 }
