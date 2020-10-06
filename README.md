@@ -18,6 +18,6 @@ show a POC for how this Vue <-> golang microservice system would work.
 [] Remove golang service entirely
 [] Add screenshots of original Excalidraw mocks
 [] Gather feedback
-[] Install Umami for self-analytics
+[x] Install Umami for self-analytics
 [] Figure out SEO
 [] Make more specific components for inputs
