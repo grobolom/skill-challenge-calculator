@@ -35,7 +35,7 @@ module.exports = {
             },
             renderer: new Renderer({
               inject: {},
-              headless: false,
+              headless: true,
               renderAfterElementExists: '#main',
           })
         }))
