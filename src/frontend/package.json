@@ -12,7 +12,6 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "prerender-spa-plugin": "^3.4.0",
     "tailwindcss": "^1.7.3",
     "typeface-libre-baskerville": "^0.0.72",
     "vue": "^3.0.0-0",
