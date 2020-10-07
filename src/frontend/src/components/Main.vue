@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" id="main">
     <div class="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div class="hero-text col-span-12">

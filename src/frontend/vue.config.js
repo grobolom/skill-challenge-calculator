@@ -1,3 +1,7 @@
+const path = require('path')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
+const Renderer = PrerenderSpaPlugin.PuppeteerRenderer
+
 module.exports = {
   publicPath: process.env.BASE_URL,
 
@@ -14,5 +18,26 @@ module.exports = {
       entry: 'src/main.ts',
       title: '5e Skill Challenge Calculator'
     }
+  },
+
+  // there might be a better way to handle this in the future, (Vue 3 launch)
+  // but this sets up pre-rendering the site for SEO
+  chainWebpack: config => {
+    config
+        .plugin("prerender-spa-plugin")
+        .use(PrerenderSpaPlugin)
+        .init(Plugin => new Plugin({
+            staticDir: path.join(__dirname, 'dist'),
+            routes: ['/'],
+            postProcess(renderedRoute) {
+              renderedRoute.html = renderedRoute.html.replace(`id="app"`, `id="app" data-server-rendered="true"`)
+              return renderedRoute
+            },
+            renderer: new Renderer({
+              inject: {},
+              headless: false,
+              renderAfterElementExists: '#main',
+          })
+        }))
   }
 }
