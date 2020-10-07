@@ -40,10 +40,10 @@ function calculateProbability(baseProbability: number, successes: number, failur
 // Currently uses a static list of successes to calculate for. The probability is
 // calculated using the negative binomial distribution
 export default function getSuccesses(
-    skillBonus: number,
-    checkDC: number,
-    failures: number
-  ): { successes: number; probability: number }[] {
+  skillBonus: number,
+  checkDC: number,
+  failures: number
+): { successes: number; probability: number }[] {
 
   // the base probability for success is based on the character's skill bonus
   // compared to the check DC. A bonus of 5 and a DC of 16 will give a 50% chance

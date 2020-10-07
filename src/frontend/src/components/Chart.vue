@@ -27,15 +27,23 @@
 
 <script type='ts'>
 import { computed } from 'vue'
+import { useStore } from 'vuex'
 import getSuccesses from '@/math/successes'
 
 export default {
-  props: ['skillBonus', 'checkDC', 'failures'],
-  setup(props) {
-    const info = computed(() => getSuccesses(props.skillBonus, props.checkDC, props.failures))
+  setup() {
+    const store = useStore()
+
+    const skillBonus = computed(() => store.state.skillBonus)
+    const checkDC = computed(() => store.state.checkDC)
+    const failures = computed(() => store.state.failures)
+    const info = computed(() => getSuccesses(skillBonus.value, checkDC.value, failures.value))
 
     return {
-      info
+      info,
+      skillBonus,
+      checkDC,
+      failures
     }
   },
 }

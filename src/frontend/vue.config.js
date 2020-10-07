@@ -1,7 +1,3 @@
-const path = require('path')
-const PrerenderSpaPlugin = require('prerender-spa-plugin')
-const Renderer = PrerenderSpaPlugin.PuppeteerRenderer
-
 module.exports = {
   publicPath: process.env.BASE_URL,
 

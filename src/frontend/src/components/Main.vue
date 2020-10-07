@@ -23,32 +23,14 @@
             </div>
 
             <div class='block inputs md:w-1/2 md:inline-block'>
-              <NumberInput
-                name="Skill Bonus"
-                :value="skillBonus"
-                @on-increment="incrementSkillBonus"
-                @on-decrement="decrementSkillBonus"
-                @on-change="setSkillBonus" />
-              <NumberInput
-                name="Check DC"
-                :value="checkDC"
-                @on-increment="incrementCheckDC"
-                @on-decrement="decrementCheckDC"
-                @on-change="setCheckDC" />
-              <NumberInput
-                name="Failures"
-                :value="failures"
-                @on-increment="incrementFailures"
-                @on-decrement="decrementFailures"
-                @on-change="setFailures" />
+              <SkillBonus />
+              <CheckDC />
+              <Failures />
             </div>
           </div>
 
           <div class='chart'>
-            <Chart
-              :skillBonus="skillBonus"
-              :checkDC="checkDC"
-              :failures="failures" />
+            <Chart />
           </div>
         </div>
       </div>
@@ -58,74 +40,16 @@
 
 <script lang="ts">
 import Chart from './Chart.vue'
-import NumberInput from './NumberInput.vue'
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import SkillBonus from './SkillBonus.vue'
+import CheckDC from './CheckDC.vue'
+import Failures from './Failures.vue'
 
 export default {
   components: {
     Chart,
-    NumberInput,
-  },
-  setup () {
-    const store = useStore()
-
-    const skillBonus = computed(() => store.state.skillBonus)
-    const checkDC = computed(() => store.state.checkDC)
-    const failures = computed(() => store.state.failures)
-
-    function incrementSkillBonus() {
-      store.dispatch('incrementSkillBonus')
-    }
-
-    function decrementSkillBonus() {
-      store.dispatch('decrementSkillBonus')
-    }
-
-    function incrementCheckDC() {
-      store.dispatch('incrementCheckDC')
-    }
-
-    function decrementCheckDC() {
-      store.dispatch('decrementCheckDC')
-    }
-
-    function incrementFailures() {
-      store.dispatch('incrementFailures')
-    }
-
-    function decrementFailures() {
-      store.dispatch('decrementFailures')
-    }
-
-    function setSkillBonus (value: number) {
-      store.dispatch('setSkillBonus', value)
-    }
-
-    function setCheckDC (value: number) {
-      store.dispatch('setCheckDC', value)
-    }
-
-    function setFailures (value: number) {
-      store.dispatch('setFailures', value)
-    }
-
-    return {
-      skillBonus,
-      incrementSkillBonus,
-      decrementSkillBonus,
-      setSkillBonus,
-
-      checkDC,
-      incrementCheckDC,
-      decrementCheckDC,
-      setCheckDC,
-
-      failures,
-      incrementFailures,
-      decrementFailures,
-      setFailures,
-    }
+    SkillBonus,
+    CheckDC,
+    Failures,
   }
 }
 </script>
