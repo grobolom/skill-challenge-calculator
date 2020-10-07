@@ -1,10 +1,11 @@
 <template>
   <NumberInput
-    name="Failures"
-    :value="failures"
-    @on-increment="incrementFailures"
-    @on-decrement="decrementFailures"
-    @on-change="setFailures" />
+    name='Failures'
+    id='failures'
+    :value='failures'
+    @on-increment='incrementFailures'
+    @on-decrement='decrementFailures'
+    @on-change='setFailures' />
 </template>
 
 <script lang='ts'>

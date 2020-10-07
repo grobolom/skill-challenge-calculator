@@ -1,8 +1,8 @@
 <template>
   <div class='wrapper'>
-    <label class="label">{{ name }}</label>
+    <label class='label' :for='id'>{{ name }}</label>
     <button class='button left-button' tabindex="-1" v-on:click="$emit('on-decrement')">-</button>
-    <input class='number' type='number' :value="value" v-on:change="$emit('on-change', $event.target.value)" />
+    <input class='number' :id='id' type='number' :value="value" v-on:change="$emit('on-change', $event.target.value)" />
     <button class='button right-button' tabindex="-1" v-on:click="$emit('on-increment')">+</button>
   </div>
 </template>
@@ -12,6 +12,7 @@
     props: {
       name: String,
       value: Number,
+      id: String,
     },
   }
 </script>

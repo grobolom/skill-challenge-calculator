@@ -1,11 +1,12 @@
 <template>
   <div>
     <NumberInput
-      name="Check DC"
-      :value="checkDC"
-      @on-increment="incrementCheckDC"
-      @on-decrement="decrementCheckDC"
-      @on-change="setCheckDC" />
+      name='Check DC'
+      id='check-dc'
+      :value='checkDC'
+      @on-increment='incrementCheckDC'
+      @on-decrement='decrementCheckDC'
+      @on-change='setCheckDC' />
   </div>
 </template>
 

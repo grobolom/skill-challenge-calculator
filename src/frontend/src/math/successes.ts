@@ -48,7 +48,10 @@ export default function getSuccesses(
   // the base probability for success is based on the character's skill bonus
   // compared to the check DC. A bonus of 5 and a DC of 16 will give a 50% chance
   // of success (0-10 fails, 11-20 succeeds).
-  const baseProbability = (21 - (checkDC - skillBonus)) / 20;
+  const baseProbability =
+    ((skillBonus + 1) >= checkDC)
+      ? 1
+      : (21 - (checkDC - skillBonus)) / 20;
 
   // just defining a constant here for convenience, but this could be expanded
   const successesRange = [3, 4, 5, 6, 7, 8, 9, 10, 11]

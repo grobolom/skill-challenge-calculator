@@ -1,10 +1,11 @@
 <template>
   <NumberInput
-    name="Skill Bonus"
-    :value="skillBonus"
-    @on-increment="incrementSkillBonus"
-    @on-decrement="decrementSkillBonus"
-    @on-change="setSkillBonus" />
+    name='Skill Bonus'
+    id='skill-bonus'
+    :value='skillBonus'
+    @on-increment='incrementSkillBonus'
+    @on-decrement='decrementSkillBonus'
+    @on-change='setSkillBonus' />
 </template>
 
 <script lang='ts'>

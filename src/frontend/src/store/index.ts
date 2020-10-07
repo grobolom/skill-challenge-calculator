@@ -11,30 +11,30 @@ export default createStore({
       state.skillBonus++
     },
     decrementSkillBonus (state) {
-      state.skillBonus = (state.skillBonus == 0) ? 0 : state.skillBonus - 1
+      state.skillBonus--
     },
     setSkillBonus (state, newValue: number) {
-      state.skillBonus = (newValue < 0) ? 0 : newValue
+      state.skillBonus = newValue
     },
 
     incrementCheckDC (state) {
       state.checkDC++
     },
     decrementCheckDC (state) {
-      state.checkDC = (state.checkDC == 0) ? 0 : state.checkDC - 1
+      state.checkDC = (state.checkDC <= 0) ? 0 : state.checkDC - 1
     },
     setCheckDC (state, newValue: number) {
-      state.checkDC = (newValue < 0) ? 0 : newValue
+      state.checkDC = (newValue <= 0) ? 0 : newValue
     },
 
     incrementFailures (state) {
       state.failures++
     },
     decrementFailures (state) {
-      state.failures = (state.failures == 0) ? 0 : state.failures - 1
+      state.failures = (state.failures <= 1) ? 1 : state.failures - 1
     },
     setFailures (state, newValue: number) {
-      state.failures = (newValue < 0) ? 0 : newValue
+      state.failures = (newValue <= 1) ? 1 : newValue
     },
   },
   actions: {
